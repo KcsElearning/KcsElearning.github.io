@@ -211,8 +211,15 @@
         .architecture h2 {
             text-align: center;
             font-size: 36px;
-            margin-bottom: 60px;
+            margin-bottom: 20px;
             color: #333;
+        }
+
+        .arch-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 60px;
         }
 
         .arch-diagram {
@@ -222,28 +229,94 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
+        .arch-layer {
+            margin-bottom: 40px;
+        }
+
+        .arch-layer:last-child {
+            margin-bottom: 0;
+        }
+
+        .arch-layer-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #667eea;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid #667eea;
+        }
+
         .arch-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            gap: 15px;
+        }
+
+        .arch-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .arch-box {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 25px;
+            padding: 20px;
             border-radius: 10px;
             text-align: center;
+            flex: 1;
+            min-width: 180px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .arch-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .arch-box.ai {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .arch-box.gateway {
+            background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
+        }
+
+        .arch-box.service {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .arch-box.data {
+            background: linear-gradient(135deg, #434343 0%, #000000 100%);
         }
 
         .arch-box h4 {
-            font-size: 18px;
-            margin-bottom: 10px;
+            font-size: 16px;
+            margin-bottom: 8px;
         }
 
         .arch-box p {
-            font-size: 13px;
+            font-size: 12px;
             opacity: 0.9;
+        }
+
+        .arch-arrow {
+            text-align: center;
+            font-size: 24px;
+            color: #667eea;
+            padding: 10px 0;
+        }
+
+        .ai-badge {
+            display: inline-block;
+            background: #38ef7d;
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: bold;
+            margin-left: 5px;
         }
 
         /* Footer */
@@ -697,27 +770,133 @@
     <section class="architecture" id="architecture">
         <div class="container">
             <h2>系统架构</h2>
+            <p class="arch-subtitle">分层架构设计，微服务化部署，AI 智能加持</p>
             <div class="arch-diagram">
-                <div class="arch-grid">
-                    <div class="arch-box">
-                        <h4>📱 移动端 H5</h4>
-                        <p>elearning_mobility_H5</p>
-                        <p style="font-size:12px;margin-top:10px;">Vue.js + 微信集成</p>
+                <div class="arch-layer">
+                    <div class="arch-layer-title">客户端层 Client Layer</div>
+                    <div class="arch-row">
+                        <div class="arch-box">
+                            <h4>📱 移动端 H5</h4>
+                            <p>elearning_mobility_H5</p>
+                            <p style="font-size:11px;margin-top:6px;">Vue.js + 微信集成</p>
+                        </div>
+                        <div class="arch-box">
+                            <h4>💻 PC端 门户</h4>
+                            <p>elearning_portal</p>
+                            <p style="font-size:11px;margin-top:6px;">Vue.js + Element UI</p>
+                        </div>
+                        <div class="arch-box">
+                            <h4>⚙️ 管理后台</h4>
+                            <p>elearning_portal_admin</p>
+                            <p style="font-size:11px;margin-top:6px;">Vue.js + Element UI</p>
+                        </div>
                     </div>
-                    <div class="arch-box">
-                        <h4>💻 PC端 门户</h4>
-                        <p>elearning_portal</p>
-                        <p style="font-size:12px;margin-top:10px;">Vue.js + Element UI</p>
+                </div>
+
+                <div class="arch-arrow">⬇️</div>
+
+                <div class="arch-layer">
+                    <div class="arch-layer-title">网关层 Gateway Layer</div>
+                    <div class="arch-row">
+                        <div class="arch-box gateway">
+                            <h4>🌐 API Gateway</h4>
+                            <p>请求路由 / 负载均衡</p>
+                            <p style="font-size:11px;margin-top:6px;">统一入口 / 权限校验</p>
+                        </div>
                     </div>
-                    <div class="arch-box">
-                        <h4>⚙️ 管理后台</h4>
-                        <p>elearning_portal_admin</p>
-                        <p style="font-size:12px;margin-top:10px;">Vue.js + 管理功能</p>
+                </div>
+
+                <div class="arch-arrow">⬇️</div>
+
+                <div class="arch-layer">
+                    <div class="arch-layer-title">业务服务层 Business Service Layer</div>
+                    <div class="arch-row">
+                        <div class="arch-box service">
+                            <h4>📚 课程服务</h4>
+                            <p>Course Service</p>
+                            <p style="font-size:11px;margin-top:6px;">课程管理 / 内容管理</p>
+                        </div>
+                        <div class="arch-box service">
+                            <h4>📋 培训服务</h4>
+                            <p>Training Service</p>
+                            <p style="font-size:11px;margin-top:6px;">培训计划 / 人员分配</p>
+                        </div>
+                        <div class="arch-box service">
+                            <h4>❓ 题库服务</h4>
+                            <p>Question Service</p>
+                            <p style="font-size:11px;margin-top:6px;">题库管理 / 测验评分</p>
+                        </div>
+                        <div class="arch-box service">
+                            <h4>👥 用户服务</h4>
+                            <p>User Service</p>
+                            <p style="font-size:11px;margin-top:6px;">用户管理 / 权限控制</p>
+                        </div>
+                        <div class="arch-box service">
+                            <h4>📊 报表服务</h4>
+                            <p>Report Service</p>
+                            <p style="font-size:11px;margin-top:6px;">数据统计 / 报表导出</p>
+                        </div>
                     </div>
-                    <div class="arch-box">
-                        <h4>🔧 业务 API</h4>
-                        <p>elearning_BusinessAPI</p>
-                        <p style="font-size:12px;margin-top:10px;">Spring Boot + MySQL</p>
+                </div>
+
+                <div class="arch-arrow">⬇️</div>
+
+                <div class="arch-layer">
+                    <div class="arch-layer-title">AI 服务层 AI Service Layer <span class="ai-badge">NEW</span></div>
+                    <div class="arch-row">
+                        <div class="arch-box ai">
+                            <h4>🤖 AI 网关</h4>
+                            <p>AI Gateway</p>
+                            <p style="font-size:11px;margin-top:6px;">LLM 调用管理 / Token 控制</p>
+                        </div>
+                        <div class="arch-box ai">
+                            <h4>💬 智能问答</h4>
+                            <p>AI Q&A Service</p>
+                            <p style="font-size:11px;margin-top:6px;">课程问答 / 难点解析</p>
+                        </div>
+                        <div class="arch-box ai">
+                            <h4>📝 智能出题</h4>
+                            <p>AI Quiz Generator</p>
+                            <p style="font-size:11px;margin-top:6px;">自动出题 / 难度分级</p>
+                        </div>
+                        <div class="arch-box ai">
+                            <h4>🎯 学习推荐</h4>
+                            <p>Recommendation Engine</p>
+                            <p style="font-size:11px;margin-top:6px;">个性化推荐 / 学习路径</p>
+                        </div>
+                        <div class="arch-box ai">
+                            <h4>🗣️ 语音处理</h4>
+                            <p>Speech Service</p>
+                            <p style="font-size:11px;margin-top:6px;">语音识别 / 口语评估</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arch-arrow">⬇️</div>
+
+                <div class="arch-layer">
+                    <div class="arch-layer-title">数据层 Data Layer</div>
+                    <div class="arch-row">
+                        <div class="arch-box data">
+                            <h4>🗄️ MySQL</h4>
+                            <p>业务数据存储</p>
+                            <p style="font-size:11px;margin-top:6px;">主数据库</p>
+                        </div>
+                        <div class="arch-box data">
+                            <h4>📦 Redis</h4>
+                            <p>缓存 / Session</p>
+                            <p style="font-size:11px;margin-top:6px;">热点数据缓存</p>
+                        </div>
+                        <div class="arch-box data">
+                            <h4>📁 文件存储</h4>
+                            <p>File Storage</p>
+                            <p style="font-size:11px;margin-top:6px;">课程资料 / 媒体文件</p>
+                        </div>
+                        <div class="arch-box data">
+                            <h4>🔧 工作流引擎</h4>
+                            <p>Activiti</p>
+                            <p style="font-size:11px;margin-top:6px;">流程审批 / 任务管理</p>
+                        </div>
                     </div>
                 </div>
             </div>
