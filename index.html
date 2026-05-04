@@ -11,10 +11,15 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Microsoft YaHei', Arial, sans-serif;
             line-height: 1.6;
             color: #333;
+            overflow-x: hidden;
         }
 
         .container {
@@ -29,6 +34,17 @@
             color: white;
             padding: 20px 0;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            background: rgba(102, 126, 234, 0.98);
+            backdrop-filter: blur(10px);
         }
 
         header .container {
@@ -38,7 +54,7 @@
         }
 
         .logo {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: bold;
             display: flex;
             align-items: center;
@@ -47,7 +63,7 @@
         .logo::before {
             content: '📚';
             margin-right: 10px;
-            font-size: 32px;
+            font-size: 28px;
         }
 
         nav ul {
@@ -59,31 +75,77 @@
         nav a {
             color: white;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 15px;
             transition: opacity 0.3s;
+            position: relative;
         }
 
         nav a:hover {
             opacity: 0.8;
         }
 
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 100px 0;
+            padding: 180px 0 120px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
         }
 
         .hero h1 {
-            font-size: 48px;
+            font-size: 52px;
             margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease;
         }
 
         .hero p {
             font-size: 20px;
             margin-bottom: 40px;
             opacity: 0.9;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero .cta-button {
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .cta-button {
@@ -100,20 +162,65 @@
 
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: white;
+            padding: 60px 0;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #666;
+            margin-top: 5px;
         }
 
         /* Features Section */
         .features {
-            padding: 80px 0;
+            padding: 100px 0;
             background: #f8f9fa;
         }
 
-        .features h2 {
+        .section-header {
             text-align: center;
-            font-size: 36px;
             margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
             color: #333;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: #666;
         }
 
         .features-grid {
@@ -125,19 +232,37 @@
         .feature-card {
             background: white;
             padding: 40px 30px;
-            border-radius: 10px;
+            border-radius: 15px;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+            transition: transform 0.4s, box-shadow 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transition: transform 0.4s;
         }
 
         .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
         }
 
         .feature-icon {
-            font-size: 48px;
+            font-size: 56px;
             margin-bottom: 20px;
         }
 
@@ -520,8 +645,24 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .hero {
+                padding: 140px 0 100px;
+            }
+
             .hero h1 {
                 font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-number {
+                font-size: 36px;
             }
 
             .arch-grid {
@@ -538,6 +679,14 @@
             }
 
             .screenshots-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 28px;
+            }
+
+            .modules-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -565,6 +714,29 @@
             <p>集课程管理、培训组织、题库考核于一体，支持PC端与移动端多端访问</p>
             <p style="font-size:16px;margin-top:10px;opacity:0.85;">✨ 即将融入AI与大模型技术，开启智能学习新纪元</p>
             <a href="#features" class="cta-button">了解更多</a>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">企业客户</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100万+</div>
+                    <div class="stat-label">注册用户</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">服务可用性</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">7×24</div>
+                    <div class="stat-label">全天候支持</div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -990,5 +1162,39 @@
             <p style="margin-top:10px;font-size:14px;">© 2024 All Rights Reserved</p>
         </div>
     </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .module-card, .screenshot-card, .future-card, .arch-layer').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
