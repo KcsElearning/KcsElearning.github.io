@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eLearning 企业在线学习平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo::before {
+            content: '📚';
+            margin-right: 10px;
+            font-size: 32px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 15px;
+        }
+
+        /* Modules Section */
+        .modules {
+            padding: 80px 0;
+        }
+
+        .modules h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            color: #333;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .module-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .module-card:hover {
+            transform: scale(1.05);
+        }
+
+        .module-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .module-card ul {
+            list-style: none;
+        }
+
+        .module-card li {
+            padding: 8px 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .module-card li::before {
+            content: '✓ ';
+            margin-right: 5px;
+        }
+
+        /* Architecture Section */
+        .architecture {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .architecture h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            color: #333;
+        }
+
+        .arch-diagram {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .arch-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .arch-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .arch-box h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .arch-box p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Future Planning Section */
+        .future-planning {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+        }
+
+        .future-planning h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .future-subtitle {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 60px;
+            opacity: 0.8;
+        }
+
+        .future-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .future-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 35px;
+            border-radius: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .future-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .future-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .future-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .future-card p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .future-card ul {
+            margin-top: 15px;
+            list-style: none;
+        }
+
+        .future-card li {
+            padding: 8px 0;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .future-card li::before {
+            content: '✨ ';
+            margin-right: 5px;
+        }
+
+        .coming-soon-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        /* Screenshots Section */
+        .screenshots {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .screenshots h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .screenshots-subtitle {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 60px;
+            color: #666;
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .screenshot-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .screenshot-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.25);
+        }
+
+        .screenshot-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .screenshot-icon {
+            font-size: 64px;
+            opacity: 0.9;
+        }
+
+        .screenshot-label {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.3);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+
+        .screenshot-content {
+            padding: 25px;
+        }
+
+        .screenshot-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .screenshot-content p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .screenshot-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .screenshot-tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .arch-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            nav ul {
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                font-size: 14px;
+            }
+
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">eLearning 企业学习平台</div>
+            <nav>
+                <ul>
+                    <li><a href="#features">核心功能</a></li>
+                    <li><a href="#modules">功能模块</a></li>
+                    <li><a href="#screenshots">系统截图</a></li>
+                    <li><a href="#architecture">系统架构</a></li>
+                    <li><a href="#future">未来规划</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>全方位企业在线培训解决方案</h1>
+            <p>集课程管理、培训组织、题库考核于一体，支持PC端与移动端多端访问</p>
+            <p style="font-size:16px;margin-top:10px;opacity:0.85;">✨ 即将融入AI与大模型技术，开启智能学习新纪元</p>
+            <a href="#features" class="cta-button">了解更多</a>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2>核心优势</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3>课程管理</h3>
+                    <p>灵活的课程创建与管理，支持多格式内容上传，课程分配与进度追踪</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>培训组织</h3>
+                    <p>培训计划制定、学员管理、培训记录追踪，支持公开培训与定向培训</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>题库与考核</h3>
+                    <p>丰富的题库管理，支持Excel导入，在线测验与成绩管理</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>用户与权限</h3>
+                    <p>完善的组织架构、角色权限管理，支持域账号登录</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>多端支持</h3>
+                    <p>PC端网页与移动端H5完美适配，随时随地学习</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>企业级安全</h3>
+                    <p>支持多租户、数据隔离，集成企业微信，安全可靠</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="modules" id="modules">
+        <div class="container">
+            <h2>功能模块</h2>
+            <div class="modules-grid">
+                <div class="module-card">
+                    <h3>📚 课程管理</h3>
+                    <ul>
+                        <li>课程创建与编辑</li>
+                        <li>课程页面管理</li>
+                        <li>课程分配</li>
+                        <li>学习进度追踪</li>
+                    </ul>
+                </div>
+                <div class="module-card">
+                    <h3>📋 培训管理</h3>
+                    <ul>
+                        <li>培训计划制定</li>
+                        <li>公开培训列表</li>
+                        <li>我的培训记录</li>
+                        <li>培训人员管理</li>
+                    </ul>
+                </div>
+                <div class="module-card">
+                    <h3>❓ 题库管理</h3>
+                    <ul>
+                        <li>题目录入</li>
+                        <li>题目分组</li>
+                        <li>Excel批量导入</li>
+                        <li>在线测验</li>
+                    </ul>
+                </div>
+                <div class="module-card">
+                    <h3>📊 成绩管理</h3>
+                    <ul>
+                        <li>测验成绩查询</li>
+                        <li>成绩统计分析</li>
+                        <li>培训报告导出</li>
+                        <li>个人学习记录</li>
+                    </ul>
+                </div>
+                <div class="module-card">
+                    <h3>🏢 系统管理</h3>
+                    <ul>
+                        <li>部门组织架构</li>
+                        <li>角色权限管理</li>
+                        <li>用户管理</li>
+                        <li>系统日志</li>
+                    </ul>
+                </div>
+                <div class="module-card">
+                    <h3>🔗 集成能力</h3>
+                    <ul>
+                        <li>企业微信集成</li>
+                        <li>域账号登录</li>
+                        <li>LDAP认证</li>
+                        <li>API接口开放</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="screenshots" id="screenshots">
+        <div class="container">
+            <h2>🖼️ 系统截图展示</h2>
+            <p class="screenshots-subtitle">直观体验平台的强大功能与友好界面</p>
+            <div class="screenshots-grid">
+                <div class="screenshot-card">
+                    <div class="screenshot-image">
+                        <div class="screenshot-label">PC端</div>
+                        <div class="screenshot-icon">💻</div>
+                    </div>
+                    <div class="screenshot-content">
+                        <h3>PC端学习门户</h3>
+                        <p>简洁美观的PC端用户界面，支持课程浏览、学习进度查看、在线测验等完整功能</p>
+                        <div class="screenshot-tags">
+                            <span class="screenshot-tag">课程学习</span>
+                            <span class="screenshot-tag">进度追踪</span>
+                            <span class="screenshot-tag">在线考试</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-image">
+                        <div class="screenshot-label">移动端</div>
+                        <div class="screenshot-icon">📱</div>
+                    </div>
+                    <div class="screenshot-content">
+                        <h3>移动端H5界面</h3>
+                        <p>完美适配移动设备的H5页面，支持微信集成，随时随地进行移动学习</p>
+                        <div class="screenshot-tags">
+                            <span class="screenshot-tag">微信集成</span>
+                            <span class="screenshot-tag">移动学习</span>
+                            <span class="screenshot-tag">触控优化</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-image">
+                        <div class="screenshot-label">管理端</div>
+                        <div class="screenshot-icon">⚙️</div>
+                    </div>
+                    <div class="screenshot-content">
+                        <h3>管理后台系统</h3>
+                        <p>功能强大的管理后台，支持课程管理、培训组织、用户权限、数据统计等全方位管理</p>
+                        <div class="screenshot-tags">
+                            <span class="screenshot-tag">课程管理</span>
+                            <span class="screenshot-tag">培训组织</span>
+                            <span class="screenshot-tag">用户管理</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-image">
+                        <div class="screenshot-label">课程管理</div>
+                        <div class="screenshot-icon">📚</div>
+                    </div>
+                    <div class="screenshot-content">
+                        <h3>课程管理中心</h3>
+                        <p>灵活的课程创建与编辑功能，支持多格式内容上传，课程分配与学习进度追踪</p>
+                        <div class="screenshot-tags">
+                            <span class="screenshot-tag">课程创建</span>
+                            <span class="screenshot-tag">内容上传</span>
+                            <span class="screenshot-tag">进度追踪</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-image">
+                        <div class="screenshot-label">题库系统</div>
+                        <div class="screenshot-icon">❓</div>
+                    </div>
+                    <div class="screenshot-content">
+                        <h3>题库与在线测验</h3>
+                        <p>完善的题库管理系统，支持Excel批量导入，在线组卷测验，自动评分与成绩分析</p>
+                        <div class="screenshot-tags">
+                            <span class="screenshot-tag">题库管理</span>
+                            <span class="screenshot-tag">在线考试</span>
+                            <span class="screenshot-tag">成绩分析</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-image">
+                        <div class="screenshot-label">数据统计</div>
+                        <div class="screenshot-icon">📊</div>
+                    </div>
+                    <div class="screenshot-content">
+                        <h3>学习数据看板</h3>
+                        <p>直观的学习数据可视化看板，实时展示培训进度、学习成果、用户活跃度等关键指标</p>
+                        <div class="screenshot-tags">
+                            <span class="screenshot-tag">数据看板</span>
+                            <span class="screenshot-tag">统计分析</span>
+                            <span class="screenshot-tag">报表导出</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="architecture" id="architecture">
+        <div class="container">
+            <h2>系统架构</h2>
+            <div class="arch-diagram">
+                <div class="arch-grid">
+                    <div class="arch-box">
+                        <h4>📱 移动端 H5</h4>
+                        <p>elearning_mobility_H5</p>
+                        <p style="font-size:12px;margin-top:10px;">Vue.js + 微信集成</p>
+                    </div>
+                    <div class="arch-box">
+                        <h4>💻 PC端 门户</h4>
+                        <p>elearning_portal</p>
+                        <p style="font-size:12px;margin-top:10px;">Vue.js + Element UI</p>
+                    </div>
+                    <div class="arch-box">
+                        <h4>⚙️ 管理后台</h4>
+                        <p>elearning_portal_admin</p>
+                        <p style="font-size:12px;margin-top:10px;">Vue.js + 管理功能</p>
+                    </div>
+                    <div class="arch-box">
+                        <h4>🔧 业务 API</h4>
+                        <p>elearning_BusinessAPI</p>
+                        <p style="font-size:12px;margin-top:10px;">Spring Boot + MySQL</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="future-planning" id="future">
+        <div class="container">
+            <h2>🚀 未来规划：AI 与大模型驱动</h2>
+            <p class="future-subtitle">融合前沿人工智能技术，打造智能化学习体验</p>
+            <div class="future-grid">
+                <div class="future-card">
+                    <div class="coming-soon-badge">即将推出</div>
+                    <div class="future-icon">🤖</div>
+                    <h3>AI 智能助教</h3>
+                    <p>基于大语言模型的智能助教系统，7×24小时在线答疑解惑</p>
+                    <ul>
+                        <li>课程内容智能问答</li>
+                        <li>学习难点自动解析</li>
+                        <li>个性化学习建议</li>
+                        <li>多轮对话交互</li>
+                    </ul>
+                </div>
+                <div class="future-card">
+                    <div class="coming-soon-badge">开发中</div>
+                    <div class="future-icon">📝</div>
+                    <h3>智能题库生成</h3>
+                    <p>AI 自动根据课程内容生成多样化题目，提升题库建设效率</p>
+                    <ul>
+                        <li>课程内容自动出题</li>
+                        <li>题目难度智能分级</li>
+                        <li>多题型自动生成</li>
+                        <li>答案解析自动编写</li>
+                    </ul>
+                </div>
+                <div class="future-card">
+                    <div class="coming-soon-badge">规划中</div>
+                    <div class="future-icon">📊</div>
+                    <h3>学习行为分析</h3>
+                    <p>深度学习算法分析学习行为，精准预测学习效果</p>
+                    <ul>
+                        <li>学习路径智能推荐</li>
+                        <li>学习风险提前预警</li>
+                        <li>个性化学习计划</li>
+                        <li>学习成果可视化</li>
+                    </ul>
+                </div>
+                <div class="future-card">
+                    <div class="coming-soon-badge">即将推出</div>
+                    <div class="future-icon">🎥</div>
+                    <h3>智能内容生成</h3>
+                    <p>AI 辅助课程内容创作，大幅降低内容制作门槛</p>
+                    <ul>
+                        <li>课程大纲自动生成</li>
+                        <li>课件内容智能扩展</li>
+                        <li>视频脚本自动撰写</li>
+                        <li>知识图谱自动构建</li>
+                    </ul>
+                </div>
+                <div class="future-card">
+                    <div class="coming-soon-badge">开发中</div>
+                    <div class="future-icon">🎯</div>
+                    <h3>个性化学习推荐</h3>
+                    <p>基于用户画像和学习数据，精准推荐最适合的学习内容</p>
+                    <ul>
+                        <li>兴趣标签智能识别</li>
+                        <li>能力短板自动发现</li>
+                        <li>学习资源精准匹配</li>
+                        <li>学习伙伴智能推荐</li>
+                    </ul>
+                </div>
+                <div class="future-card">
+                    <div class="coming-soon-badge">规划中</div>
+                    <div class="future-icon">🗣️</div>
+                    <h3>语音交互与评估</h3>
+                    <p>集成语音识别和口语评估技术，支持语言类培训场景</p>
+                    <ul>
+                        <li>语音指令控制</li>
+                        <li>口语发音评估</li>
+                        <li>实时语音转文字</li>
+                        <li>多语言支持</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>eLearning 企业在线学习平台 | 助力企业人才发展</p>
+            <p style="margin-top:10px;font-size:14px;">© 2024 All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+</html>
